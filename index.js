@@ -16,6 +16,7 @@ app.get("/", (req, res) => {
           body {
               background-color:gray;
               color: black;
+              
           }
       </style>
   </head>
