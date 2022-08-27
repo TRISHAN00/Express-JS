@@ -1,31 +1,26 @@
 const express = require("express");
+const fs = require("fs");
 
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send(`
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Node Js</title>
-      <style>
-          * {margin: 0; padding: 0; box-sizing: border-box;}
-          body {
-              background-color:gray;
-              color: black;
-              
-          }
-      </style>
-  </head>
-  <body>
-      <h2>Hello Node JS</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, suscipit.</p>
-  </body>
-  </html>
-  `);
+  fs.readFile("./pages/index.html", (err, data) => {
+    if (err) {
+      console.log("Error", err);
+      res.send("We had some issue into the code.");
+    } else {
+      res.write(data);
+      res.end();
+    }
+  });
+});
+
+app.get("/about", (req, res) => {
+  res.send("This is about route.");
+});
+
+app.get("/help", (req, res) => {
+  res.send("This is help route.");
 });
 
 app.listen(4000, () => {
