@@ -16,11 +16,27 @@ app.get("/", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
-  res.send("This is about route.");
+  fs.readFile("./pages/about.html", (err, data) => {
+    if (err) {
+      console.log("Error", err);
+      res.send("We hade error into about page.");
+    } else {
+      res.write(data);
+      res.end();
+    }
+  });
 });
 
 app.get("/help", (req, res) => {
-  res.send("This is help route.");
+  fs.readFile("./pages/help.html", (err, data) => {
+    if (err) {
+      console.log("Error", err);
+      res.send("We had error into help page.");
+    } else {
+      res.write(data);
+      res.end();
+    }
+  });
 });
 
 app.listen(4000, () => {
