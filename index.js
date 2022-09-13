@@ -1,4 +1,5 @@
 const express = require("express");
+const { get } = require("express/lib/response");
 const fs = require("fs");
 
 const app = express();
@@ -73,4 +74,10 @@ app.get("/help", (req, res) => {
 
 app.listen(4000, () => {
   console.log("Served is listening on PORT 4000");
+});
+
+// post route
+app.post("books", (req, res) => {
+  console.log(req.body);
+  res.end();
 });
