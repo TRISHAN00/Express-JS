@@ -3,6 +3,24 @@ const fs = require("fs");
 
 const app = express();
 
+const books = [
+  {
+    id: "1",
+    name: "Personal Finance",
+    price: "500",
+  },
+  {
+    id: "2",
+    name: "Learn Javascript",
+    price: "1500",
+  },
+  {
+    id: "3",
+    name: "Poor Dad Rich Dad",
+    price: "850",
+  },
+];
+
 app.get("/", (req, res) => {
   fs.readFile("./pages/index.html", (err, data) => {
     if (err) {
@@ -13,6 +31,12 @@ app.get("/", (req, res) => {
       res.end();
     }
   });
+});
+
+app.get("/books", (req, res) => {
+  console.log(req.query);
+  const result = books.filter((book) => book.price <= 800);
+  res.json(result);
 });
 
 app.get("/about", (req, res) => {
