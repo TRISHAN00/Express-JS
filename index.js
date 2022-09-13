@@ -34,9 +34,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/books", (req, res) => {
-  console.log(req.query);
-  const result = books.filter((book) => book.price <= 800);
-  res.json(result);
+  if (req.query.show === "all") {
+    return res.json(books);
+  }
+
+  if (req.query.price === "800") {
+    const result = books.filter((book) => book.price <= 800);
+    res.json(result);
+  }
 });
 
 app.get("/about", (req, res) => {
