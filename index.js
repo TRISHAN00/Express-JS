@@ -16,6 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
+  console.log(req.url);
   fs.readFile("./pages/about.html", (err, data) => {
     if (err) {
       console.log("Error", err);
