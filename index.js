@@ -34,7 +34,6 @@ app.get("/books", (req, res) => {
   return res.json(books);
 });
 
-// post route
 app.post("/books", (req, res) => {
   console.log(req.body);
 });
