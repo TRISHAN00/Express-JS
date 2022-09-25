@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 
 app.get("/about", (req, res) => {
-  res.send(`This is About Page`);
+  res.json({
+    message: "I am response from Router About Handler",
+  });
 });
 
 app.get("/contract", (req, res) => {
