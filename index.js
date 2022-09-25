@@ -1,13 +1,11 @@
 const express = require("express");
-const morgan = require("morgan");
-const mongoose = require("mongoose");
-
 const app = express();
+const PORK = process.env.PORK || 8080;
 
-app.use(morgan("dev"));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.get("/", (req, res) => {
+  res.send(`<h2>This is my first Route</h2>`);
+});
 
-app.listen(port, () => {
-  console.log("Server is listening port 8000");
+app.listen(PORK, () => {
+  console.log(`Served is running on pork ${PORK}`);
 });
