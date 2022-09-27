@@ -4,6 +4,13 @@ const app = express();
 
 // app.use(morgan("dev"));
 
+function customMiddleware(req, res, next) {
+  console.log("All is well");
+  next();
+}
+
+app.use(customMiddleware);
+
 app.get("/about", morgan("dev"), (req, res) => {
   res.json({
     message: "I am response from Router About Handler",
