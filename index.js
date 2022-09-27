@@ -2,9 +2,9 @@ const express = require("express");
 const morgan = require("morgan");
 const app = express();
 
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 
-app.get("/about", (req, res) => {
+app.get("/about", morgan("dev"), (req, res) => {
   res.json({
     message: "I am response from Router About Handler",
   });
