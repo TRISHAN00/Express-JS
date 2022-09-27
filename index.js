@@ -6,10 +6,20 @@ const app = express();
 
 function customMiddleware(req, res, next) {
   console.log("All is well");
+  console.log(req.url);
+  next();
+}
+
+function pageBlockUsingUrl(req, res, next) {
+  if (req.url === "/contract") {
+    res.send(`<h2>Our All Service Currently Declined.</h2>`);
+  }
   next();
 }
 
 app.use(customMiddleware);
+
+app.use(pageBlockUsingUrl);
 
 app.get("/about", morgan("dev"), (req, res) => {
   res.json({
