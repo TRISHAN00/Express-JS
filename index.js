@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const router = express.Router();
+const userRouter = require("./router");
 
 // app.use(morgan("dev"));
 
@@ -20,21 +20,12 @@ function pageBlockUsingUrl(req, res, next) {
 const middleware = [customMiddleware, pageBlockUsingUrl];
 
 app.use(middleware);
-app.use("/user", router);
+app.use("/user", userRouter);
 
-router.get("/logout", (req, res) => {
-  res.json({
-    message: "I am response from logout Handler",
-  });
-});
-router.get("/login", (req, res) => {
-  res.send("This is Login Page");
-});
-
-router.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send(`<h2>This is my first Route</h2>`);
 });
-router.get("*", (req, res) => {
+app.get("*", (req, res) => {
   res.send(`<h2>404 Not Found</h2>`);
 });
 
