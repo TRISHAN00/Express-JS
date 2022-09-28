@@ -7,6 +7,11 @@ const postRouter = require("./postRoute");
 app.use("/user", userRouter);
 app.use("/posts", postRouter);
 
+app.get("/products/:prodId/reviews/:reviewId", (req, res) => {
+  console.log(req.params);
+  res.send("I am listening" + " " + req.params.prodId);
+});
+
 app.get("/", (req, res) => {
   res.send(`<h2>This is my home Route</h2>`);
 });
