@@ -1,3 +1,4 @@
+const router = require("express").Router();
 const {
   getAllPosts,
   getSinglePost,
@@ -5,8 +6,6 @@ const {
   updatePost,
   deletePost,
 } = require("./postsController");
-
-const router = require("express").Router();
 
 router.get("/", getAllPosts);
 
