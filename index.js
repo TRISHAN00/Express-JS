@@ -1,6 +1,6 @@
 const express = require("express");
-const morgan = require("morgan");
 const app = express();
+const router = express.Router();
 
 // app.use(morgan("dev"));
 
@@ -17,25 +17,24 @@ function pageBlockUsingUrl(req, res, next) {
   next();
 }
 
-app.use(customMiddleware);
+const middleware = [customMiddleware, pageBlockUsingUrl];
 
-app.use(pageBlockUsingUrl);
+app.use(middleware);
+app.use("/user", router);
 
-app.get("/about", morgan("dev"), (req, res) => {
+router.get("/logout", (req, res) => {
   res.json({
-    message: "I am response from Router About Handler",
+    message: "I am response from logout Handler",
   });
 });
-
-app.get("/contract", (req, res) => {
-  res.send("This is Contract Page");
+router.get("/login", (req, res) => {
+  res.send("This is Login Page");
 });
 
-app.get("/", (req, res) => {
+router.get("/", (req, res) => {
   res.send(`<h2>This is my first Route</h2>`);
 });
-
-app.get("*", (req, res) => {
+router.get("*", (req, res) => {
   res.send(`<h2>404 Not Found</h2>`);
 });
 
