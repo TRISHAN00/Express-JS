@@ -1,30 +1,16 @@
 const express = require("express");
+
 const app = express();
-const userRouter = require("./router");
+const userRouter = require("./userRoute");
+const postRouter = require("./postRoute");
 
-// app.use(morgan("dev"));
-
-function customMiddleware(req, res, next) {
-  console.log("All is well");
-  console.log(req.url);
-  next();
-}
-
-function pageBlockUsingUrl(req, res, next) {
-  if (req.url === "/contract") {
-    res.send(`<h2>Our All Service Currently Declined.</h2>`);
-  }
-  next();
-}
-
-const middleware = [customMiddleware, pageBlockUsingUrl];
-
-app.use(middleware);
 app.use("/user", userRouter);
+app.use("/posts", postRouter);
 
 app.get("/", (req, res) => {
-  res.send(`<h2>This is my first Route</h2>`);
+  res.send(`<h2>This is my home Route</h2>`);
 });
+
 app.get("*", (req, res) => {
   res.send(`<h2>404 Not Found</h2>`);
 });
